@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --fuente-base: 'Roboto Mono',sans-serif;
+    --fuente-titulos: 'Roboto', sans-serif;
+    --Fondo: #000000;
+    --tarjeta: #1E1E22;
+    --textoP: #F0F0F5;
+    --textoS: #8E8E93;
+    --azul: #22D3EE;
+    --acept: #22C55E;
+    --deneg: #EF4444;
+}
+
+body{
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--Fondo);
+    background-image: 
+    radial-gradient(circle at 90% 30%, rgba(34, 211, 238, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 10% 70%, rgba(34, 211, 238, 0.2) 0%, transparent 50%);
+    font-family: var(--fuente-base);
+    color: var(--textoP);
+}
+
+main{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card{
+    background-color: var(--tarjeta);
+    border-left: 3px solid var(--azul);
+    border-radius: 4px;
+    padding: 40px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+h1{
+    font-family: var(--fuente-titulos);
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--textoP);
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+h1 span{
+    color: var(--azul);
+}
+
+.card-texts{
+    margin-bottom: 24px;
+}
+
+.card-titulo{
+    font-family: var(--fuente-titulos);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--textoP);
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    border-bottom: 2px solid var(--azul);
+    display: inline-block;
+}
+
+.card-info{
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--textoS);
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
+.frm-lbls{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.frm-lbls label{
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--textoS);
+    margin-bottom: 6px;
+}
+
+.frm-lbls input{
+    background-color: var(--Fondo);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: var(--fuente-base);
+    font-size: 14px;
+    color: var(--textoP);
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.frm-lbls input::placeholder{
+    color: var(--textoS);
+    opacity: 0.6;
+}
+
+.frm-lbls input:focus{
+    border-color: var(--azul);
+}
+
+.frm-btn{
+    margin-top: 8px;
+}
+
+.btn_registrar{
+    width: 100%;
+    background-color: var(--azul);
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-family: var(--fuente-titulos);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn_registrar:hover{
+    opacity: 0.85;
+}
+
+.reloj{
+    font-family: var(--fuente-titulos);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--azul);
+    text-align: center;
+    letter-spacing: 5px;
+    background-color: var(--Fondo);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+/*PANEL-----------------------------------------*/
+.ultimo-registro{
+    background-color: var(--Fondo);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.ultimo-registro p{
+    font-size: 13px;
+    color: var(--textoS);
+    line-height: 1.5;
+}
+
+.ultimo-registro strong{
+    color: var(--textoP);
+}
+
+.frm-btn-doble{
+    display: flex;
+    gap: 12px;
+}
+
+.frm-btn-doble button{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 10px;
+    font-family: var(--fuente-titulos);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn_ingreso{
+    background-color: var(--acept);
+    color: #000000;
+}
+
+.btn_egreso{
+    background-color: var(--deneg);
+    color: #000000;
+}
+
+.frm-btn-doble button:hover{
+    opacity: 0.85;
+}
+
