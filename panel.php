@@ -1,5 +1,13 @@
+<?php
+require "config.php";
+requerir_login();
+
+$ultimo = ultimo_movimiento($conexion, $_SESSION["empleado_id"]);
+// Si el último fue INGRESO, lo siguiente es EGRESO (y viceversa)
+$proximo = ($ultimo && $ultimo["tipo"] === "INGRESO") ? "EGRESO" : "INGRESO";
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- ICONOS -->
 
     <title>FICHAR - Sistema de Fichadas</title>
 </head>
@@ -19,12 +26,22 @@
     <h1>Fich<span>AR</span></h1>
     <div id="reloj" class="reloj"></div>
 
+    <p class="saludo">Hola, <strong><?= e($_SESSION["nombre"]) ?></strong></p>
+
+    <?php mostrar_flash(); ?>
+
     <div class="ultimo-registro">
-        <p>Tu último registro fue: <strong>INGRESO</strong> a las <strong>08:03</strong> del <strong>15/09/2026</strong></p>
+        <?php if ($ultimo): ?>
+            <p>Tu último registro fue: <strong><?= e($ultimo["tipo"]) ?></strong>
+               a las <strong><?= date("H:i", strtotime($ultimo["fecha_hora"])) ?></strong>
+               del <strong><?= date("d/m/Y", strtotime($ultimo["fecha_hora"])) ?></strong></p>
+        <?php else: ?>
+            <p>Todavía no tenés registros.</p>
+        <?php endif; ?>
     </div>
 
-    <div class="frm-btn-doble">
-        <button class="btn_ingreso">
+    <form action="registrar.php" method="post" class="frm-btn-doble">
+        <button type="submit" name="tipo" value="INGRESO" class="btn_ingreso" <?= $proximo !== "INGRESO" ? "disabled" : "" ?>>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
                 <polyline points="10 17 15 12 10 7"/>
@@ -33,7 +50,7 @@
             Registrar Ingreso
         </button>
 
-        <button class="btn_egreso">
+        <button type="submit" name="tipo" value="EGRESO" class="btn_egreso" <?= $proximo !== "EGRESO" ? "disabled" : "" ?>>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                 <polyline points="16 17 21 12 16 7"/>
@@ -41,20 +58,11 @@
             </svg>
             Registrar Egreso
         </button>
-    </div>
+    </form>
+
+    <a href="logout.php" class="link-salir">Cerrar sesión</a>
 </div>
     </main>
-    <script>
-        function actualizarReloj(){
-    const ahora = new Date();
-    const horas = String(ahora.getHours()).padStart(2, '0');
-    const minutos = String(ahora.getMinutes()).padStart(2, '0');
-    const segundos = String(ahora.getSeconds()).padStart(2, '0');
-    document.getElementById('reloj').textContent = `${horas}:${minutos}:${segundos}`;
-}
-
-actualizarReloj();
-setInterval(actualizarReloj, 1000);
-    </script>
+    <script src="js/reloj.js"></script>
 </body>
 </html>
